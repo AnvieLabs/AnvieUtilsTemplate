@@ -15,10 +15,12 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -Werror -fsanitize=address")
 # add include_directory calls to include submodule headers
 add_subdirectory(Modules)
 
+# use this project's include directory
+include_directories(Include)
+
 # link all targets to anvutils_headers, providing access to
 # Anvie Utils headers to every source file within project.
-link_libraries(anvutils_headers)
+link_libraries(anvutils_headers anvutils_common)
 
-# create an executable
-add_executable(anvtemplate Source/Main.c)
-target_link_libraries(anvtemplate anvutils_containers)
+# add source
+add_subdirectory(Source)
